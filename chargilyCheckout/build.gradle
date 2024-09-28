@@ -30,48 +30,7 @@ android {
         jvmTarget = '1.8'
     }
 }
-publishing {
-    publications {
-        release(MavenPublication){
 
-            groupId = "com.github.aarundn" // Your group ID
-            artifactId = "chargily-sdk" // Your library name
-            version = "1.0-alpha"
-            afterEvaluate {
-                from components.release
-            }
-            // Add more metadata like description, licenses, developers, etc.
-            pom {
-                name.set("chargily sdk")
-                description.set("A brief description of your library.")
-                url.set("https://github.com/aarundn/chargilysdk1")
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 1.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("aarundn")
-                        name.set("haroun debchoune")
-                        email.set("debchouneharoun@gmail.com")
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = "ossrh"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/") // OSSRH
-            credentials {
-                username = project.findProperty("ossrhUsername") as String?: ""
-                password = project.findProperty("ossrhPassword") as String?: ""
-            }
-        }
-    }
-}
 
 //publishing {
 //    publications {
@@ -91,4 +50,5 @@ dependencies {
     implementation libs.retrofit
     implementation libs.converter.gson
     implementation libs.logging.interceptor
+    testImplementation libs.junit
 }
