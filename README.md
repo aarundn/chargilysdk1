@@ -11,7 +11,7 @@ To use this SDK, follow these steps:
 
 Add the following dependency to your `build.gradle` (Module: app) file:
 
-```groovy
+```gradle
 dependencies {
     implementation 'com.github.aarundn:chargilysdk1:1.0-beta'
 }
@@ -20,7 +20,7 @@ dependencies {
 
 Initialize the SDK with the base URL and your secret key:
 
-```
+```kotlin
 val chargilyPay = ChargilyCheckout()
 
 chargilyPay.initialize(
@@ -32,7 +32,7 @@ chargilyPay.initialize(
 
 Use the `createCheckout` method to create a new checkout session. This requires the amount, currency, and success URL:
 
-```
+```kotlin
 chargilyPay.createCheckout(
     CheckoutRequest(
         amount = 2000f,
@@ -55,7 +55,7 @@ chargilyPay.createCheckout(
 Handle the success and error cases within your `createCheckou`t method.
 Upon success, the SDK will return a checkout URL that can be opened using an `Intent`. In case of failure, the error message will be displayed:
 
-```
+```kotlin
 onSuccess = { checkoutUrl ->
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(checkoutUrl))
     startActivity(intent)
@@ -76,7 +76,7 @@ Make sure to replace the example values with your actual secret key and URLs:
 
 Here’s a complete example of the SDK in use within an Android activity:
 
-```
+```kotlin
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
