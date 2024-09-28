@@ -28,59 +28,71 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        // You can exclude other problematic files similarly if needed
+        // exclude 'META-INF/other_file_to_exclude'
+    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
 }
-publishing {
-    publications {
-        release(MavenPublication){
 
-            groupId = "com.github.aarundn" // Your group ID
-            artifactId = "chargily-sdk" // Your library name
-            version = "1.0-alpha"
-//            afterEvaluate {
-//                from components.release
+
+//publishing {
+//    publications {
+//        release(MavenPublication){
+//
+//            groupId = "com.github.aarundn" // Your group ID
+//            artifactId = "chargily-sdk" // Your library name
+//            version = "1.0-alpha"
+////            afterEvaluate {
+////                from components.release
+////            }
+//            // Add more metadata like description, licenses, developers, etc.
+//            pom {
+//                name.set("chargilysdk")
+//                description.set("A brief description of your library.")
+//                url.set("https://github.com/aarundn/chargilysdk1")
+//                licenses {
+//                    license {
+//                        name.set("The Apache License, Version 1.0")
+//                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id.set("aarundn")
+//                        name.set("haroun debchoune")
+//                        email.set("debchouneharoun@gmail.com")
+//                    }
+//                }
+//
+//                scm {
+//                    connection = 'scm:git:git://github.com/aarundn/chargily-sdk.git'
+//                    developerConnection = 'scm:git:ssh://github.com/aarundn/chargily-sdk.git'
+//                    url = 'https://github.com/aarundn/chargily-sdk'
+//                }
 //            }
-            // Add more metadata like description, licenses, developers, etc.
-            pom {
-                name.set("chargilysdk")
-                description.set("A brief description of your library.")
-                url.set("https://github.com/aarundn/chargilysdk1")
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 1.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("aarundn")
-                        name.set("haroun debchoune")
-                        email.set("debchouneharoun@gmail.com")
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = "ossrh"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/") // OSSRH
-            credentials {
-                username = project.findProperty("ossrhUsername") as String?: ""
-                password = project.findProperty("ossrhPassword") as String?: ""
-            }
-        }
-    }
-}
-tasks.register('testClasses') {}
-tasks.register("publishAndReleaseToMavenCentral") {
-    doLast {
-        // Implement your logic here
-        // For example, you could call the existing `publishToMavenCentral` task:
-    }
-}
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            url "https://oss.sonatype.org/content/repositories/snapshots/"
+//            credentials {
+//                username = project.findProperty("ossrhUsername") ?: ""
+//                password = project.findProperty("ossrhPassword") ?: ""
+//            }
+//        }
+//
+//    }
+//}
+//signing {
+//    useGpgCmd()
+//    sign publishing.publications.release
+//}
+//tasks.register('testClasses') {}
 dependencies {
 
     implementation libs.androidx.core.ktx
@@ -89,6 +101,7 @@ dependencies {
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
     testImplementation libs.junit
+    implementation libs.maven.plugin.api
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
 }

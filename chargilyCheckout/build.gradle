@@ -30,7 +30,17 @@ android {
         jvmTarget = '1.8'
     }
 }
+afterEvaluate {
+    android.libraryVariants.each { variant ->
+        publishing.publications.create(variant.name, MavenPublication){
+            from components.findByName(variant.name)
+            groupId = 'com.github.aarundn'
+            artifactId = 'chargilyCheckout'
+            version = '1.0-alpha'
+        }
 
+    }
+}
 
 //publishing {
 //    publications {
