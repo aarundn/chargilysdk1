@@ -1,12 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id 'maven-publish'
-    id 'signing'
+    id ("maven-publish")
 }
 
 android {
-    namespace 'com.example.chargilycheckout'
+    namespace 'io.github.aarundn'
     compileSdk 34
 
     defaultConfig {
@@ -30,17 +29,16 @@ android {
         jvmTarget = '1.8'
     }
 }
-afterEvaluate {
-    android.libraryVariants.each { variant ->
-        publishing.publications.create(variant.name, MavenPublication){
-            from components.findByName(variant.name)
-            groupId = 'com.github.aarundn'
-            artifactId = 'chargilyCheckout'
-            version = '1.0-alpha'
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
+                from components.release
+            }
         }
-
     }
 }
+
 
 //publishing {
 //    publications {

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id 'maven-publish'
-    id 'signing'
+
 }
 
 android {
@@ -93,6 +93,7 @@ android {
 //    sign publishing.publications.release
 //}
 //tasks.register('testClasses') {}
+
 dependencies {
 
     implementation libs.androidx.core.ktx
@@ -100,6 +101,7 @@ dependencies {
     implementation libs.material
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
+    implementation project(':chargilyCheckout')
     testImplementation libs.junit
     implementation libs.maven.plugin.api
     androidTestImplementation libs.androidx.junit
