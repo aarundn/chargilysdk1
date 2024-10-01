@@ -6,8 +6,21 @@ Chargily SDK simplifies the integration of the Chargily payment gateway into you
 ## Getting Started
 
 To use this SDK, follow these steps:
+### Step 1: Add Jitpack link
 
-### Step 1: Add Dependency
+Add the following Jitpack link to your `settings.gradle` (Module: app) file:
+
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        `maven { url 'https://jitpack.io' }`
+    }
+}
+```
+### Step 2: Add Dependency
 
 Add the following dependency to your `build.gradle` (Module: app) file:
 
@@ -16,7 +29,7 @@ dependencies {
     implementation 'com.github.aarundn:chargilysdk1:1.0-beta'
 }
 ```
-### Step 2: Initialize Chargily SDK
+### Step 3: Initialize Chargily SDK
 
 Initialize the SDK with the base URL and your secret key:
 
@@ -28,7 +41,7 @@ chargilyPay.initialize(
     "SecretKeyXXXXXXXXXXXXXXXXXXX"
 )
 ```
-### Step 3: Create Checkout
+### Step 4: Create Checkout
 
 Use the `createCheckout` method to create a new checkout session. This requires the amount, currency, and success URL:
 
@@ -50,7 +63,7 @@ chargilyPay.createCheckout(
 )
 
 ```
-### Step 4: Handle Success and Error
+### Step 5: Handle Success and Error
 
 Handle the success and error cases within your `createCheckou`t method.
 Upon success, the SDK will return a checkout URL that can be opened using an `Intent`. In case of failure, the error message will be displayed:
@@ -65,7 +78,7 @@ onError = { errorMessage ->
     Toast.makeText(this, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
 }
 ```
-### Step 5: Customize Your Integration
+### Step 6: Customize Your Integration
 
 Make sure to replace the example values with your actual secret key and URLs:
 
